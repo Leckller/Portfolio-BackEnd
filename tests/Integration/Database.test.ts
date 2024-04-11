@@ -3,6 +3,7 @@ import chaiHttp from 'chai-http';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import { app } from '../../src/app';
+import fs from 'fs/promises';
 import DatabaseMock from '../mocks/Database.Mock';
 
 chai.use(chaiHttp);
@@ -27,12 +28,24 @@ describe('Testes para o banco de dados', () => {
   });
 
   it('Testa se é possivel adicionar um projeto', async () => {
-    const httpReq = await chai.request(app).post('/').set({ authorization: key }).send(mock.validProject());
-    console.log(httpReq.body);
-  })
-  it('Testa se retorna um erro caso não seja passado algum dos campos', async () => { });
+    const httpReq = await chai.request(app)
+      .post('/').set({ authorization: key }).send(mock.validProject());
 
-  it('Testa se retorna um status 200 caso consigo deletar algum projeto', async () => { });
+    expect(httpReq.status).to.be.eq(201);
+    expect(httpReq.body).to.deep.eq({ message: 'Projeto adicionado' });
+  })
+
+  it('Testa se retorna um erro caso não seja passado algum dos campos', async () => {
+
+  });
+
+  it('Testa se retorna um status 200 caso consigo deletar algum projeto', async () => {
+    const httpReq = await chai.request(app).delete('/').set({ authorization: key }).send(mock.validProject());
+
+
+    expect(httpReq.status).to.be.eq(200);
+    expect(httpReq.body).to.deep.eq({ message: 'Projeto removido' });
+  });
 
   it('Testa se retorna um status 404 caso não consigo encontrar algum projeto', async () => { });
 

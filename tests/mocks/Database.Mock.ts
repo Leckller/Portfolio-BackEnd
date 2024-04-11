@@ -1,10 +1,8 @@
 import { ProjetosType } from "../../src/types";
 
 export default class DatabaseMock {
-  public emptyProject(): ProjetosType {
+  public invalidProject(): Partial<ProjetosType> {
     return {
-      describe: '',
-      gitHub: '',
       tecnologias: [''],
       title: '',
       url: '',
@@ -16,7 +14,6 @@ export default class DatabaseMock {
       title: 'Bombastic Project',
       describe: 'Um projeto bacana',
       tecnologias: ['React', 'Redux'],
-      //Estes link é falso
       url: 'https://ruy-dev.vercel.app/',
       gitHub: 'https://github.com/Leckller/Bombastic',
     }
