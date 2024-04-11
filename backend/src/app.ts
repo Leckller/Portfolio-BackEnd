@@ -1,10 +1,12 @@
 import express, { Router } from 'express'
 import router from './routes';
+import cors from 'cors'
 
 export default class App {
   private _app = express();
 
   constructor(router: Router) {
+    this._app.use(cors)
     this._app.use(express.json())
     this._app.use(router)
   }
