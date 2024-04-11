@@ -3,18 +3,15 @@ import chaiHttp from 'chai-http';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import { app } from '../../src/app';
-import Database from '../../src/database/Database';
-import DatabaseMock from '../mocks/Database.Mock';
-
 
 chai.use(chaiHttp);
 chai.use(sinonChai);
-const Mock = new DatabaseMock();
-const db = new Database();
+
+const key = process.env.SUPER_SECRET_PASSWORD_OMG;
 
 describe('Testes para o banco de dados', () => {
   it('Testa se retorna todos os projetos', async () => {
-    const httpReq = await chai.request(app).get('/');
+    const httpReq = await chai.request(app).get('/').set({ authorization: key });
 
     expect(httpReq.body.data).to.has.an('array');
     for (const project in httpReq.body.data) {
