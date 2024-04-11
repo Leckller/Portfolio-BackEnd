@@ -6,3 +6,5 @@ const PasswordMiddleware = (req: Request, res: Response, next: NextFunction) => 
   if (password != key) { return res.status(401).json({ message: "Não autorizado." }) }
   next();
 }
+
+export default PasswordMiddleware;

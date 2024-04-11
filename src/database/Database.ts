@@ -6,7 +6,7 @@ export default class Database {
   private dbPath = path.resolve(__dirname, './projetos.json');
   public async allProjects(): Promise<ProjetosType[]> {
     const data = await fs.readFile(this.dbPath);
-    return JSON.parse(JSON.stringify(data));
+    return JSON.parse(data.toString())
   }
   public async addProject(newProject: ProjetosType): Promise<string> {
     const { describe, gitHub, tecnologias, title, url } = newProject;
