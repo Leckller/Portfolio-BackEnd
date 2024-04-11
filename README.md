@@ -5,3 +5,5 @@
 * Utilizei neste projeto as seguintes tecnologias:
   - Para testes: Mocha, Chai, Sinon e Nyc
   - Para o servidor: Express
+
+* Caso queira testar o app é necessário criar um arquivo .env e adicionar a variavel de nome "SUPER_SECRET_PASSWORD_OMG" e passar para ela qualquer string
