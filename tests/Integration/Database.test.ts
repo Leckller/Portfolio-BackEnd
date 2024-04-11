@@ -17,11 +17,13 @@ describe('Testes para o banco de dados', () => {
     const httpReq = await chai.request(app).get('/');
 
     expect(httpReq.body.data).to.has.an('array');
-    expect(httpReq.body.data[0]).to.have.property('title');
-    expect(httpReq.body.data[0]).to.have.property('url');
-    expect(httpReq.body.data[0]).to.have.property('describe');
-    expect(httpReq.body.data[0]).to.have.property('tecnologias');
-    expect(httpReq.body.data[0]).to.have.property('gitHub');
+    for (const project in httpReq.body.data) {
+      expect(httpReq.body.data[project]).to.have.property('title');
+      expect(httpReq.body.data[project]).to.have.property('url');
+      expect(httpReq.body.data[project]).to.have.property('describe');
+      expect(httpReq.body.data[project]).to.have.property('tecnologias');
+      expect(httpReq.body.data[project]).to.have.property('gitHub');
+    }
   });
 
   it('Testa se é possivel adicionar um projeto', async () => { })
