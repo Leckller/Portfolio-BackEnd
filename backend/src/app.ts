@@ -6,7 +6,7 @@ export default class App {
   private _app = express();
 
   constructor(router: Router) {
-    this._app.use(cors({ origin: ['https://ruy-dev.vercel.app/', 'http://localhost:5173/'] }))
+    this._app.use(cors({ origin: '*' }))
     this._app.use(express.json())
     this._app.use(router)
   }
