@@ -25,4 +25,11 @@ routeMain.delete('/', async (req, res) => {
   res.status(status).json(data);
 })
 
+routeMain.patch('/', async (req, res) => {
+  const { describe, gitHub, tecnologias, title, actualTitle, url } = req.body;
+  const { data, status } = await db.editProject({ describe, url, gitHub, tecnologias, title }, actualTitle);
+
+  res.status(status).json(data);
+})
+
 export default routeMain;

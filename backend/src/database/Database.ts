@@ -45,4 +45,18 @@ export default class Database {
       return { data: { message: 'Ocorreu um erro inesperado' }, status: 500 }
     }
   }
+
+  public async editProject(newProject: ProjetosType, actualTitle: string): Promise<MethodResponse<{ message: string }>> {
+    const { data } = await this.allProjects();
+    const i = data.findIndex(e => e.title === actualTitle);
+    const { describe, gitHub, tecnologias, title, url } = newProject;
+
+    data[i].describe = describe.length > 1 ? describe : data[i].describe;
+    data[i].gitHub = gitHub.length > 1 ? describe : data[i].gitHub;
+    data[i].tecnologias = tecnologias.length > 1 ? tecnologias : data[i].tecnologias;
+    data[i].title = title.length > 1 ? title : data[i].title;
+    data[i].url = url.length > 1 ? url : data[i].url;
+
+    return { data: { message: 'Projeto editado' }, status: 200 }
+  }
 }
