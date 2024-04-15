@@ -21,15 +21,9 @@ function Home() {
 
   return (
     <div className="w-screen h-screen">
-      {popup.open && (
-        <Popup popup={ popup } setPopup={ setPopup } />
-      )}
+      {popup.open && (<Popup popup={ popup } setPopup={ setPopup } />)}
 
-      {
-        newProj.open && (
-          <AddProject newProj={ newProj } setNewProj={ setNewProj } />
-        )
-      }
+      { newProj.open && (<AddProject newProj={ newProj } setNewProj={ setNewProj } />)}
 
       <header className="p-5">
         <button
