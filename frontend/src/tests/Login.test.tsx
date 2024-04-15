@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import App from '../App.tsx';
 import Provider from '../Provider.tsx';
 import { ProjetosType } from '../types.ts';
@@ -7,8 +8,10 @@ const keypass = import.meta.env.VITE_LOGIN;
 const secret = import.meta.env.VITE_SECRET;
 
 describe('Login tests', () => {
+  beforeEach(() => vi.resetAllMocks());
+
   it('Testa se ao as credencias corretas espera que seja possivel ir para a rota home', async () => {
-    const { screen, user, vi } = renderWithRouter(<Provider><App /></Provider>);
+    const { screen, user } = renderWithRouter(<Provider><App /></Provider>);
 
     vi.spyOn(global, 'fetch').mockResolvedValue({
       ok: true,
