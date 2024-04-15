@@ -22,13 +22,13 @@ routeMain.post('/', async (req, res) => {
 routeMain.delete('/', async (req, res) => {
   const { title } = req.body;
   const { data, status } = await db.deleteProject(title);
+  console.log(title)
   res.status(status).json(data);
 })
 
 routeMain.patch('/', async (req, res) => {
   const { describe, gitHub, tecnologias, title, actualTitle, url } = req.body;
   const { data, status } = await db.editProject({ describe, url, gitHub, tecnologias, title }, actualTitle);
-  console.log(req.body)
   res.status(status).json(data);
 })
 

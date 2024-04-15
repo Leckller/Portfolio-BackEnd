@@ -2,9 +2,11 @@ import { ProjFields, ProjetosFieldsBool, ProjetosType } from '../types.ts';
 
 function Editable({ text, field, setEdit, edit, fields, handleFields }: {
   field: ProjFields,
+   // eslint-disable-next-line no-unused-vars
    setEdit: (p: ProjetosType) => void,
   edit: ProjetosType, fields: ProjetosFieldsBool,
-  handleFields: (field: ProjFields) => void,
+  // eslint-disable-next-line no-unused-vars
+  handleFields: (f: ProjFields) => void,
   text: string
 }) {
   return (
@@ -23,7 +25,7 @@ function Editable({ text, field, setEdit, edit, fields, handleFields }: {
         w-[300px] h-[20px]` }
         onClick={ () => handleFields(field) }
       >
-        ----E----
+        {fields[field] ? 'Salvar' : 'Editar'}
       </button>
     </div>
   );

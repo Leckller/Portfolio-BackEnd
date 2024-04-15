@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { ProjFields, ProjetosFieldsBool, ProjetosType } from '../types.ts';
 import DatabaseFetch from '../service/DatabaseFetch.ts';
 import Editable from './Editable.tsx';
-import DeleteProject from './DeleteProject.tsx';
 
 type PopupType = {
   open: boolean, projeto: ProjetosType
@@ -93,7 +92,6 @@ function Popup({ setPopup, popup }:
         >
           Salvar
         </button>
-        <DeleteProject title={ popup.projeto.title } />
       </div>
     </div>
   );

@@ -46,7 +46,7 @@ export default class DatabaseFetch {
   public async removeProject(title: string): Promise<{message: string}> {
     const Request = await fetch(url, {
       method: 'DELETE',
-      body: JSON.stringify(title),
+      body: JSON.stringify({ title }),
       headers: {
         'Content-Type': 'application/json',
         authorization,
