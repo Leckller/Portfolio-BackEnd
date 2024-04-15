@@ -13,6 +13,7 @@ function Editable({ text, field, setEdit, edit, fields, handleFields }: {
     <div className="flex flex-col gap-2 flex-wrap items-center text-center">
       {fields[field] ? (
         <textarea
+          data-testid="textarea"
           className="w-full h-[100px]"
           value={ edit[field] }
           onChange={ ({ target: { value } }) => setEdit({ ...edit, [field]: value }) }
@@ -23,6 +24,7 @@ function Editable({ text, field, setEdit, edit, fields, handleFields }: {
       <button
         className={ `${fields[field] ? 'bg-blue-400' : 'bg-green-400'}
         w-[300px] h-[20px]` }
+        data-testid="button"
         onClick={ () => handleFields(field) }
       >
         {fields[field] ? 'Salvar' : 'Editar'}

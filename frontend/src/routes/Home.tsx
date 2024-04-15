@@ -41,6 +41,7 @@ function Home() {
             className="flex flex-row gap-5 w-[300px] text-left"
           >
             <button
+              data-testid="project"
               className="text-2xl font-bold border-2 rounded-md border-black p-1"
               onClick={ () => handleClick(proj) }
             >

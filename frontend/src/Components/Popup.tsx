@@ -18,6 +18,8 @@ function Popup({ setPopup, popup }:
     title: false,
     url: false,
   });
+  const fieldsArray: ProjFields[] = ['title', 'describe', 'gitHub', 'url'];
+
   const handleFields = (field: ProjFields) => {
     setFields({ ...fields, [field]: !fields[field] });
   };
@@ -30,23 +32,17 @@ function Popup({ setPopup, popup }:
         X
       </button>
 
-      <Editable
-        edit={ edit }
-        field="title"
-        fields={ fields }
-        handleFields={ handleFields }
-        setEdit={ setEdit }
-        text={ edit.title }
-      />
-
-      <Editable
-        edit={ edit }
-        field="describe"
-        fields={ fields }
-        handleFields={ handleFields }
-        setEdit={ setEdit }
-        text={ edit.describe }
-      />
+      {fieldsArray.map((campo) => (
+        <Editable
+          key={ campo }
+          edit={ edit }
+          field={ campo }
+          fields={ fields }
+          handleFields={ handleFields }
+          setEdit={ setEdit }
+          text={ edit[campo] as string }
+        />
+      ))}
 
       <div>
         {edit.tecnologias.sort((a, b) => a.length - b.length)
@@ -56,24 +52,6 @@ function Popup({ setPopup, popup }:
             </h5>
           ))}
       </div>
-
-      <Editable
-        edit={ edit }
-        field="gitHub"
-        text={ edit.gitHub }
-        fields={ fields }
-        handleFields={ handleFields }
-        setEdit={ setEdit }
-      />
-
-      <Editable
-        edit={ edit }
-        field="url"
-        fields={ fields }
-        handleFields={ handleFields }
-        setEdit={ setEdit }
-        text={ edit.url }
-      />
 
       <div className="flex flex-row gap-2">
         <button
