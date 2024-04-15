@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
-import { ProjetosType } from '../types.ts';
+import { ProjFields, ProjetosFieldsBool, ProjetosType } from '../types.ts';
 import DatabaseFetch from '../service/DatabaseFetch.ts';
+import Editable from './Editable.tsx';
+import DeleteProject from './DeleteProject.tsx';
 
 type PopupType = {
   open: boolean, projeto: ProjetosType
@@ -10,44 +12,43 @@ type PopupType = {
 function Popup({ setPopup, popup }:
    {setPopup: (p: PopupType) => void, popup: PopupType}) {
   const [edit, setEdit] = useState<ProjetosType>(popup.projeto);
-  const [fields, setFields] = useState({
+  const [fields, setFields] = useState<ProjetosFieldsBool>({
     describe: false,
     gitHub: false,
     tecnologias: false,
     title: false,
     url: false,
   });
-
-  const handleFields = (field: string) => {
-    setFields({ ...fields, [field]: !fields.title });
+  const handleFields = (field: ProjFields) => {
+    setFields({ ...fields, [field]: !fields[field] });
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center relative">
       <button
         onClick={ () => setPopup({ open: false, projeto: {} as ProjetosType }) }
       >
         X
       </button>
 
-      <div className="flex flex-row gap-2">
-        {fields.title ? (
-          <input
-            type="text"
-            value={ edit.title }
-            onChange={ ({ target: { value } }) => setEdit({ ...edit, title: value }) }
-          />
-        ) : (
-          <h2>{edit.title}</h2>
-        )}
-        <button
-          onClick={ () => handleFields('title') }
-        >
-          ----E----
-        </button>
-      </div>
+      <Editable
+        edit={ edit }
+        field="title"
+        fields={ fields }
+        handleFields={ handleFields }
+        setEdit={ setEdit }
+        text={ edit.title }
+      />
 
-      <p className="mb-3">{edit.describe}</p>
+      <Editable
+        edit={ edit }
+        field="describe"
+        fields={ fields }
+        handleFields={ handleFields }
+        setEdit={ setEdit }
+        text={ edit.describe }
+      />
+
       <div>
         {edit.tecnologias.sort((a, b) => a.length - b.length)
           .map((tec) => (
@@ -57,26 +58,43 @@ function Popup({ setPopup, popup }:
           ))}
       </div>
 
-      <button
-        className="disabled:opacity-20"
-        disabled={
-          edit.describe === popup.projeto.describe
+      <Editable
+        edit={ edit }
+        field="gitHub"
+        text={ edit.gitHub }
+        fields={ fields }
+        handleFields={ handleFields }
+        setEdit={ setEdit }
+      />
+
+      <Editable
+        edit={ edit }
+        field="url"
+        fields={ fields }
+        handleFields={ handleFields }
+        setEdit={ setEdit }
+        text={ edit.url }
+      />
+
+      <div className="flex flex-row gap-2">
+        <button
+          className="disabled:opacity-20"
+          disabled={
+            edit.describe === popup.projeto.describe
           && edit.gitHub === popup.projeto.gitHub
           && edit.tecnologias === popup.projeto.tecnologias
           && edit.title === popup.projeto.title && edit.url === popup.projeto.url
-        }
-        onClick={ () => {
-          const effect = async () => {
+          }
+          onClick={ () => {
             const db = new DatabaseFetch();
-            const resp = await db.editProject(edit, popup.projeto.title);
-            console.log(resp);
+            db.editProject(edit, popup.projeto.title);
             setPopup({ open: false, projeto: {} as ProjetosType });
-          };
-          effect();
-        } }
-      >
-        Salvar
-      </button>
+          } }
+        >
+          Salvar
+        </button>
+        <DeleteProject title={ popup.projeto.title } />
+      </div>
     </div>
   );
 }

@@ -52,7 +52,7 @@ export default class Database {
     const { describe, gitHub, tecnologias, title, url } = newProject;
 
     data[i].describe = describe.length > 1 ? describe : data[i].describe;
-    data[i].gitHub = gitHub.length > 1 ? describe : data[i].gitHub;
+    data[i].gitHub = gitHub.length > 1 ? gitHub : data[i].gitHub;
     data[i].tecnologias = tecnologias.length > 1 ? tecnologias : data[i].tecnologias;
     data[i].title = title.length > 1 ? title : data[i].title;
     data[i].url = url.length > 1 ? url : data[i].url;
