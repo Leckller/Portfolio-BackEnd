@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Context from '../Context';
+import Context from '../Context.tsx';
 
 const keypass = import.meta.env.VITE_LOGIN;
 const secret = import.meta.env.VITE_SECRET;
@@ -21,19 +21,21 @@ function Login() {
   };
   return (
     <div>
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        handleSubmit();
-      }}>
+      <form
+        onSubmit={ (e) => {
+          e.preventDefault();
+          handleSubmit();
+        } }
+      >
         <input
-          onChange={({ target: { value } }) => setLogin(value)}
-          value={login}
+          onChange={ ({ target: { value } }) => setLogin(value) }
+          value={ login }
           type="text"
         />
 
         <input
-          onChange={({ target: { value } }) => setSenha(value)}
-          value={senha}
+          onChange={ ({ target: { value } }) => setSenha(value) }
+          value={ senha }
           type="password"
         />
 
