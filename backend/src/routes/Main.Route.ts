@@ -31,7 +31,7 @@ routeMain.delete('/', async (req, res) => {
 routeMain.patch('/', async (req, res) => {
   const { describe, gitHub, tecnologias, title, actualTitle, url } = req.body;
   const { data, status } = await db.editProject({ describe, url, gitHub, tecnologias, title }, actualTitle);
-  console.log('PATCH- ' + data)
+  console.log('PATCH- ' + data.message)
   res.status(status).json(data);
 })
 

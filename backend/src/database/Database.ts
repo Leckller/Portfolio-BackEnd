@@ -57,6 +57,8 @@ export default class Database {
     data[i].title = title.length > 1 ? title : data[i].title;
     data[i].url = url.length > 1 ? url : data[i].url;
 
+    await fs.writeFile(this.dbPath, JSON.stringify([...data]));
+
     return { data: { message: 'Projeto editado' }, status: 200 }
   }
 }
