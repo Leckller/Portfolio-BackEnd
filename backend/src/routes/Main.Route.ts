@@ -10,6 +10,7 @@ routeMain.use(PasswordMiddleware)
 
 routeMain.get('/', async (_req, res) => {
   const dbData = await db.allProjects();
+  console.log('GET')
   res.status(200).json(dbData)
 });
 

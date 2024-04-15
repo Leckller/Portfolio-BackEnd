@@ -36,19 +36,21 @@ function Login() {
       >
         <input
           className="border-2 border-black rounded-md"
+          data-testid="key"
           onChange={ ({ target: { value } }) => setLogin(value) }
           value={ login }
           type="text"
         />
 
         <input
+          data-testid="password"
           className="border-2 border-black rounded-md"
           onChange={ ({ target: { value } }) => setSenha(value) }
           value={ senha }
           type="password"
         />
 
-        <button type="submit">Logar</button>
+        <button type="submit" data-testid="login">Logar</button>
       </form>
     </div>
   );
