@@ -4,10 +4,11 @@ import { ProjetosType, TecnologiaType } from '../types.ts';
 export default interface Fetchs {
   getItems(): Promise<ProjetosType[] | TecnologiaType[]>;
 
-  addItem(project: ProjetosType): Promise<ProjetosType[] | TecnologiaType[]>;
+  addItem(item: ProjetosType | TecnologiaType)
+  : Promise<ProjetosType[] | TecnologiaType[]>;
 
   removeItems(title: string): Promise<ProjetosType[] | TecnologiaType[]>;
 
-  editItems(project: ProjetosType, actualTitle: string)
+  editItems(title: string, fields: string[], values: string[])
   : Promise<ProjetosType | TecnologiaType>;
 }

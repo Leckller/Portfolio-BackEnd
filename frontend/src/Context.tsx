@@ -8,13 +8,15 @@ type context = {
   login: boolean
   setLogin: (p:boolean) => void;
   tec: {
-    setPopUpTec: (p: Popup<TecnologiaType>) => void;
+    setPopupTec: (p: Popup<TecnologiaType>) => void;
     popupTec: Popup<TecnologiaType>
   }
   proj: {
-    setPopUpProj: (p: Popup<ProjetosType>) => void;
+    setPopupProj: (p: Popup<ProjetosType>) => void;
     popupProj: Popup<ProjetosType>
   }
+  data: { tecs: TecnologiaType[], projs: ProjetosType[]}
+  setData: (p: {tecs: TecnologiaType[], projs: ProjetosType[]}) => void,
 }
 
 const Context = createContext({} as context);

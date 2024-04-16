@@ -17,11 +17,11 @@ export default class TecFetch implements Fetchs {
     return Response.data;
   }
 
-  public async editItems(project: TecnologiaType, actualTitle: string)
+  public async editItems(title: string, fields: string[], values: string[])
   : Promise<TecnologiaType> {
     const Request = await fetch(url, {
       method: 'PATCH',
-      body: JSON.stringify({ ...project, actualTitle }),
+      body: JSON.stringify({ title, fields, values }),
       headers: {
         'Content-Type': 'application/json',
         authorization,
@@ -31,10 +31,10 @@ export default class TecFetch implements Fetchs {
     return Response.data;
   }
 
-  public async addItem(project: TecnologiaType): Promise<TecnologiaType[]> {
+  public async addItem(item: TecnologiaType): Promise<TecnologiaType[]> {
     const Request = await fetch(url, {
       method: 'POST',
-      body: JSON.stringify(project),
+      body: JSON.stringify(item),
       headers: {
         'Content-Type': 'application/json',
         authorization,

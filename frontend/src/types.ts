@@ -21,3 +21,4 @@ export type TecnologiaType = {
 }
 
 export type ProjFields = 'title' | 'url' | 'gitHub' | 'tecnologias' | 'describe'
+export type TecFields = 'title' | 'img' |'type'

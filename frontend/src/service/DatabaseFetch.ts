@@ -17,11 +17,11 @@ export default class DatabaseFetch implements Fetchs {
     return Response.data;
   }
 
-  public async editItems(project: ProjetosType, actualTitle: string)
+  public async editItems(title: string, fields: string[], values: string[])
   : Promise<ProjetosType> {
     const Request = await fetch(url, {
       method: 'PATCH',
-      body: JSON.stringify({ ...project, actualTitle }),
+      body: JSON.stringify({ title, fields, values }),
       headers: {
         'Content-Type': 'application/json',
         authorization,

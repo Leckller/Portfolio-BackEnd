@@ -1,14 +1,31 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import Context from '../Context.tsx';
+import { ProjetosType, TecnologiaType } from '../types.ts';
 
 function Layout() {
   const titleHeader = useLocation().pathname;
+  const inHome = titleHeader.includes('home');
+  const { tec, proj } = useContext(Context);
+  const navigate = useNavigate();
   return (
     <div>
-      <header className="p-5">
+      <header className="p-5 flex flex-row justify-between">
         <button
           data-testid="new-project-button"
+          onClick={ () => {
+            if (inHome) {
+              proj.setPopupProj({ open: true, type: {} as ProjetosType });
+              return;
+            }
+            tec.setPopupTec({ open: true, type: {} as TecnologiaType });
+          } }
         >
-          {`Adicionar ${titleHeader.includes('home') ? 'Projeto' : 'Tecnologia'}`}
+          {`Adicionar ${inHome ? 'Projeto' : 'Tecnologia'}`}
+        </button>
+
+        <button onClick={ () => navigate(inHome ? '/tec' : '/home') }>
+          {inHome ? 'Tecnologias' : 'Projetos'}
         </button>
       </header>
 
