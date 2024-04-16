@@ -5,10 +5,16 @@ import DeleteProject from '../Components/DeleteProject.tsx';
 
 function Tecnologies() {
   const [tecs, setTecs] = useState<TecnologiaType[]>([]);
+  const [popup, setPopup] = useState({ open: false, projeto: {} as TecnologiaType });
   const db = new TecFetch();
+
   useEffect(() => {
     db.getTecs().then((e) => setTecs(e));
   }, []);
+
+  const handleClick = (projeto: TecnologiaType) => {
+    setPopup({ open: !popup.open, projeto });
+  };
 
   return (
     <div className="w-screen h-screen">
@@ -33,7 +39,7 @@ function Tecnologies() {
             >
               <h2>{proj.title}</h2>
             </button>
-            <DeleteProject title={ proj.title } />
+            <DeleteProject title={ proj.title } DB={ db } />
           </div>
         )) : <div>Loading</div>}
       </main>

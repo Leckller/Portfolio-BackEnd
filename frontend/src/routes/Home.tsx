@@ -12,7 +12,7 @@ function Home() {
   const [newProj, setNewProj] = useState({ open: false, newProject: {} as ProjetosType });
 
   useEffect(() => {
-    db.getProjects().then((e) => setProjetos(e));
+    db.getItems().then((e) => setProjetos(e));
   }, []);
 
   const handleClick = (projeto: ProjetosType) => {
