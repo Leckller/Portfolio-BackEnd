@@ -1,11 +1,10 @@
 import fs from 'fs/promises'
-import path from 'path'
 
 export default class FileSystemDB {
   private pathFile: string
 
   constructor(pathFile: string) {
-    this.pathFile = path.resolve(__dirname, pathFile);
+    this.pathFile = pathFile;
   }
 
   public async readFile(): Promise<any[]> {
@@ -46,6 +45,6 @@ export default class FileSystemDB {
 
     await fs.writeFile(this.pathFile, JSON.stringify([...data]));
 
-    return data;
+    return data[data.length - 1];
   }
 }

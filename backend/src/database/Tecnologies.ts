@@ -1,17 +1,15 @@
+import path from 'path'
 import FileSystemDB from '../utils/FileSystemDB';
+import { TecnologiaType } from '../types';
 
-type TecnologiaType = {
-  name: string,
-  image: string
-  tier: number
-}
 type Message = { message: string }
 
 type MethodResponse<T> = { data: T, status: number }
 
 
 export default class Tecnologies {
-  private db = new FileSystemDB('./tecnologias.json')
+
+  private db = new FileSystemDB(path.resolve(__dirname, './tecnologias.json'))
 
   public async getTecnologies(): Promise<MethodResponse<TecnologiaType[]>> {
     const data = await this.db.readFile();

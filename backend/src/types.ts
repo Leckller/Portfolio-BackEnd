@@ -5,3 +5,9 @@ export type ProjetosType = {
   url: string,
   gitHub: string,
 };
+
+export type TecnologiaType = {
+  title: string,
+  img: string
+  type: number
+}
