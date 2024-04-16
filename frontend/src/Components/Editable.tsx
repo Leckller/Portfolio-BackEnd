@@ -22,8 +22,8 @@ function Editable({ text, field, setEdit, edit, fields, handleFields }: {
         <h2>{text}</h2>
       )}
       <button
-        className={ `${fields[field] ? 'bg-blue-400' : 'bg-green-400'}
-        w-[300px] h-[20px]` }
+        className={ `${fields[field] ? 'bg-blue-400' : 'bg-white'}
+        max-w-[300px] w-full h-[50px] rounded-md text-lg font-bold` }
         data-testid="button"
         onClick={ () => handleFields(field) }
       >

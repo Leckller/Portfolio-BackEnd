@@ -13,12 +13,24 @@ function Login() {
 
   const handleSubmit = () => {
     if (login === keypass && secret === senha) {
+      localStorage.setItem('login', login);
+      localStorage.setItem('secret', secret);
       provider.setLogin(true);
       navigate('/home');
       return;
     }
     alert('tá errado o vacilão');
   };
+  // melhor criptografar isso aq logo
+  const localLogin = localStorage.getItem('login');
+  const localSecret = localStorage.getItem('secret');
+
+  if (localLogin === keypass && localSecret === secret) {
+    provider.setLogin(true);
+    navigate('/home');
+    return;
+  }
+
   return (
     <div className="flex flex-col items-center justify-around h-screen w-screen">
       <header className="h-[30%] text-center flex items-center">

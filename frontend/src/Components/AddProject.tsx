@@ -19,7 +19,7 @@ function AddProject({ setNewProj, newProj }
       } });
   };
   return (
-    <DivPopup w={ 80 } h={ 80 }>
+    <DivPopup>
       <button
         className="w-full text-end"
         onClick={ () => setNewProj({ open: false,

@@ -8,7 +8,7 @@ function DeleteProject({ title }: {title: string}) {
   return (
     <>
       {confirm && (
-        <DivPopup h={ 50 } w={ 80 }>
+        <DivPopup>
           <h2 className="text-center text-xl">
             Tem certeza que você quer apagar o projeto
             <span className="text-2xl font-bold">{` "${title}"`}</span>

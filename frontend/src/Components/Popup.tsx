@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { ProjFields, ProjetosFieldsBool, ProjetosType } from '../types.ts';
 import DatabaseFetch from '../service/DatabaseFetch.ts';
 import Editable from './Editable.tsx';
+import DivPopup from './DivPopup.tsx';
 
 type PopupType = {
   open: boolean, projeto: ProjetosType
@@ -25,9 +26,10 @@ function Popup({ setPopup, popup }:
   };
 
   return (
-    <div className="flex flex-col items-center justify-center relative">
+    <DivPopup>
       <button
         data-testid="close-popup"
+        className="w-full text-end text-2xl font-bold pr-2 pt-1"
         onClick={ () => setPopup({ open: false, projeto: {} as ProjetosType }) }
       >
         X
@@ -45,35 +47,34 @@ function Popup({ setPopup, popup }:
         />
       ))}
 
-      <div>
+      <h2>Tecnologias</h2>
+      <div className="flex flex-row gap-3 justify-center">
         {edit.tecnologias.sort((a, b) => a.length - b.length)
           .map((tec) => (
-            <h5 key={ tec }>
+            <h5 className="p-1 rounded-md bg-white" key={ tec }>
               {tec}
             </h5>
           ))}
       </div>
 
-      <div className="flex flex-row gap-2">
-        <button
-          className="disabled:opacity-20"
-          disabled={
-            edit.describe === popup.projeto.describe
+      <button
+        className="disabled:opacity-70 disabled:bg-red-200 bg-green-200 p-2"
+        disabled={
+          edit.describe === popup.projeto.describe
           && edit.gitHub === popup.projeto.gitHub
           && edit.tecnologias === popup.projeto.tecnologias
           && edit.title === popup.projeto.title && edit.url === popup.projeto.url
-          }
-          data-testid="save-edit"
-          onClick={ () => {
-            const db = new DatabaseFetch();
-            db.editProject(edit, popup.projeto.title);
-            setPopup({ open: false, projeto: {} as ProjetosType });
-          } }
-        >
-          Salvar
-        </button>
-      </div>
-    </div>
+        }
+        data-testid="save-edit"
+        onClick={ () => {
+          const db = new DatabaseFetch();
+          db.editProject(edit, popup.projeto.title);
+          setPopup({ open: false, projeto: {} as ProjetosType });
+        } }
+      >
+        Salvar
+      </button>
+    </DivPopup>
   );
 }
 
