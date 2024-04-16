@@ -5,6 +5,7 @@ import { ProjetosType } from '../types';
 type MethodResponse<T> = { data: T, status: number }
 
 export default class Database {
+
   private dbPath = path.resolve(__dirname, './projetos.json');
   public async allProjects(): Promise<MethodResponse<ProjetosType[]>> {
     const data = await fs.readFile(this.dbPath);
