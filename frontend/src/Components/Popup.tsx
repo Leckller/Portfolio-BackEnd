@@ -27,6 +27,7 @@ function Popup({ setPopup, popup }:
   return (
     <div className="flex flex-col items-center justify-center relative">
       <button
+        data-testid="close-popup"
         onClick={ () => setPopup({ open: false, projeto: {} as ProjetosType }) }
       >
         X
@@ -62,6 +63,7 @@ function Popup({ setPopup, popup }:
           && edit.tecnologias === popup.projeto.tecnologias
           && edit.title === popup.projeto.title && edit.url === popup.projeto.url
           }
+          data-testid="save-edit"
           onClick={ () => {
             const db = new DatabaseFetch();
             db.editProject(edit, popup.projeto.title);

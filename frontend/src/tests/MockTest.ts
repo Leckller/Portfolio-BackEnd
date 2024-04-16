@@ -6,7 +6,10 @@ export default class HomeMock {
       {
         title: 'itunes',
         url: 'https://ruy-tunes.vercel.app/',
-        describe: 'Descubra uma nova dimensão musical com o ruyTunes, o aplicativo de música que transforma sua experiência auditiva. Explore uma vasta biblioteca de músicas de alta qualidade diretamente do iTunes, proporcionando acesso instantâneo a milhões de faixas.',
+        describe: `Descubra uma nova dimensão musical com o ruyTunes,
+         o aplicativo de música que transforma sua experiência auditiva. 
+         Explore uma vasta biblioteca de músicas de alta qualidade diretamente
+          do iTunes, proporcionando acesso instantâneo a milhões de faixas.`,
         tecnologias: [
           'Vite',
           'React',

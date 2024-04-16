@@ -26,7 +26,7 @@ describe.only('Home tests', () => {
   });
 
   it('Testa se é possivel editar um projeto', async () => {
-    const { screen, user, debug } = renderWithRouter(<Provider><Home /></Provider>);
+    const { screen, user } = renderWithRouter(<Provider><Home /></Provider>);
 
     const projetos = await screen.findAllByTestId('project');
     await user.click(projetos[0]);
@@ -37,7 +37,11 @@ describe.only('Home tests', () => {
     const textareas = await screen.findAllByTestId('textarea');
     await user.type(textareas[0], 'fake-itunes!');
 
-    debug();
+    const saveButton = await screen.findByTestId('save-edit');
+    await user.click(buttons[0]);
+    await user.click(saveButton);
+
+    expect(global.fetch).toHaveBeenCalledTimes(2);
   });
 
   it('Testa se é possivel adicionar um novo projeto', async () => {
