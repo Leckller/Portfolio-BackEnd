@@ -8,7 +8,10 @@ const keypass = import.meta.env.VITE_LOGIN;
 const secret = import.meta.env.VITE_SECRET;
 
 describe('Login tests', () => {
-  beforeEach(() => vi.resetAllMocks());
+  beforeEach(() => {
+    vi.resetAllMocks();
+    localStorage.clear();
+  });
 
   it('Testa se ao as credencias corretas espera que seja possivel ir para a rota home', async () => {
     const { screen, user } = renderWithRouter(<Provider><App /></Provider>);

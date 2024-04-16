@@ -15,6 +15,7 @@ function DeleteProject({ title }: {title: string}) {
           </h2>
           <div className="flex flex-row justify-around">
             <button
+              data-testid="confirm-button"
               className="w-20 p-5 border-gray-950 border-2"
               onClick={ () => {
                 db.removeProject(title);
@@ -24,6 +25,7 @@ function DeleteProject({ title }: {title: string}) {
               Sim
             </button>
             <button
+              data-testid="cancel-button"
               className="w-20 p-5 border-gray-950 border-2"
               onClick={ () => setConfirm(false) }
             >
@@ -32,7 +34,10 @@ function DeleteProject({ title }: {title: string}) {
           </div>
         </DivPopup>
       )}
-      <button onClick={ () => setConfirm((prev) => !prev) }>
+      <button
+        data-testid="delete-button"
+        onClick={ () => setConfirm((prev) => !prev) }
+      >
         Delete
       </button>
     </>

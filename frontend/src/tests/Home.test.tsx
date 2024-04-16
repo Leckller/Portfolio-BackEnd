@@ -7,7 +7,7 @@ import HomeMock from './MockTest.ts';
 
 const mocks = new HomeMock();
 
-describe.only('Home tests', () => {
+describe('Home tests', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.spyOn(global, 'fetch').mockResolvedValue({
@@ -46,8 +46,36 @@ describe.only('Home tests', () => {
 
   it('Testa se é possivel adicionar um novo projeto', async () => {
     const { screen, user } = renderWithRouter(<Provider><Home /></Provider>);
+
+    const addButton = await screen.findByTestId('new-project-button');
+
+    await user.click(addButton);
+
+    const inputs = await screen.findAllByTestId('new-project-button');
+
+    await user.type(inputs[0], 'test');
+    await user.type(inputs[1], 'omaga its a amazing test');
+    await user.type(inputs[2], 'react, typescript');
+    await user.type(inputs[3], 'http://testandomuitooooo/');
+    await user.type(inputs[4], 'http://testandomuitooooo2222/');
+
+    const confirmProject = await screen.findByTestId('add-project-button');
+
+    await user.click(confirmProject);
+
+    expect(global.fetch).toHaveBeenCalledTimes(2);
   });
   it('Testa se é possivel remover um projeto', async () => {
     const { screen, user } = renderWithRouter(<Provider><Home /></Provider>);
+
+    const inputs = await screen.findAllByTestId('delete-button');
+
+    await user.click(inputs[0]);
+
+    const confirmButton = await screen.findByTestId('confirm-button');
+
+    await user.click(confirmButton);
+
+    expect(global.fetch).toHaveBeenCalledTimes(2);
   });
 });

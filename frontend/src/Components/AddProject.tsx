@@ -31,6 +31,7 @@ function AddProject({ setNewProj, newProj }
         <label className="flex flex-col w-full ">
           Title
           <input
+            data-testid="new-project-button"
             onChange={ ({ target: { value } }) => {
               handleAddProject('title', value);
             } }
@@ -41,6 +42,7 @@ function AddProject({ setNewProj, newProj }
         <label className="flex flex-col w-full ">
           Descrição
           <textarea
+            data-testid="new-project-button"
             className="resize-none w-full"
             onChange={ ({ target: { value } }) => {
               handleAddProject('describe', value);
@@ -52,6 +54,7 @@ function AddProject({ setNewProj, newProj }
         <label className="flex flex-col w-full ">
           Tecnologias
           <input
+            data-testid="new-project-button"
             onChange={ ({ target: { value } }) => {
               handleAddProject('tecnologias', value);
             } }
@@ -63,6 +66,7 @@ function AddProject({ setNewProj, newProj }
         <label className="flex flex-col w-full ">
           Url
           <input
+            data-testid="new-project-button"
             onChange={ ({ target: { value } }) => {
               handleAddProject('url', value);
             } }
@@ -73,6 +77,7 @@ function AddProject({ setNewProj, newProj }
         <label className="flex flex-col w-full ">
           gitHub
           <input
+            data-testid="new-project-button"
             onChange={ ({ target: { value } }) => {
               handleAddProject('gitHub', value);
             } }
@@ -82,6 +87,7 @@ function AddProject({ setNewProj, newProj }
       </div>
 
       <button
+        data-testid="add-project-button"
         onClick={ () => {
           db.addProject(newProj.newProject);
           setNewProj({ open: false,

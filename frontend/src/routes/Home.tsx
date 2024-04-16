@@ -27,6 +27,7 @@ function Home() {
 
       <header className="p-5">
         <button
+          data-testid="new-project-button"
           onClick={ () => setNewProj({ open: true,
             newProject: {} as ProjetosType }) }
         >
