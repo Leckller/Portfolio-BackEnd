@@ -14,4 +14,10 @@ export type ProjetosFieldsBool = {
   url: false,
 }
 
+export type TecnologiaType = {
+  title: string,
+  img: string
+  type: number
+}
+
 export type ProjFields = 'title' | 'url' | 'gitHub' | 'tecnologias' | 'describe'

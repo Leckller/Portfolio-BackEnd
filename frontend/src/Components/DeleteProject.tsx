@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import DatabaseFetch from '../service/DatabaseFetch.ts';
 import DivPopup from './DivPopup.tsx';
+import Fetchs from '../interfaces/Fetchs.ts';
 
-function DeleteProject({ title }: {title: string}) {
+function DeleteProject({ title, DB }: {title: string, DB: Fetchs}) {
   const [confirm, setConfirm] = useState(false);
-  const db = new DatabaseFetch();
+
   return (
     <>
       {confirm && (
@@ -18,7 +18,7 @@ function DeleteProject({ title }: {title: string}) {
               data-testid="confirm-button"
               className="w-20 p-5 border-gray-950 border-2"
               onClick={ () => {
-                db.removeProject(title);
+                DB.removeItems(title);
                 setConfirm(false);
               } }
             >

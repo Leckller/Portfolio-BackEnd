@@ -48,7 +48,7 @@ function Home() {
             >
               <h2>{proj.title}</h2>
             </button>
-            <DeleteProject title={ proj.title } />
+            <DeleteProject DB={ db } title={ proj.title } />
           </div>
         )) : <div>Loading</div>}
       </main>

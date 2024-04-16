@@ -1,10 +1,11 @@
 import { ProjetosType } from '../types.ts';
+import Fetchs from '../interfaces/Fetchs.ts';
 
 const authorization = import.meta.env.VITE_AUTH;
 const url = import.meta.env.VITE_URL;
 
-export default class DatabaseFetch {
-  public async getProjects(): Promise<ProjetosType[]> {
+export default class DatabaseFetch implements Fetchs {
+  public async getItems(): Promise<ProjetosType[]> {
     const Request = await fetch(url, {
       method: 'GET',
       headers: {
@@ -16,8 +17,8 @@ export default class DatabaseFetch {
     return Response.data;
   }
 
-  public async editProject(project: ProjetosType, actualTitle: string)
-  : Promise<{message: string}> {
+  public async editItems(project: ProjetosType, actualTitle: string)
+  : Promise<ProjetosType> {
     const Request = await fetch(url, {
       method: 'PATCH',
       body: JSON.stringify({ ...project, actualTitle }),
@@ -30,7 +31,7 @@ export default class DatabaseFetch {
     return Response.data;
   }
 
-  public async addProject(project: ProjetosType): Promise<{message: string}> {
+  public async addItem(project: ProjetosType): Promise<ProjetosType[]> {
     const Request = await fetch(url, {
       method: 'POST',
       body: JSON.stringify(project),
@@ -43,7 +44,7 @@ export default class DatabaseFetch {
     return Response.data;
   }
 
-  public async removeProject(title: string): Promise<{message: string}> {
+  public async removeItems(title: string): Promise<ProjetosType[]> {
     const Request = await fetch(url, {
       method: 'DELETE',
       body: JSON.stringify({ title }),

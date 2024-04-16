@@ -26,7 +26,7 @@ export default class FileSystemDB {
     const data = await this.readFile();
     const filtredData = data.filter(e => e[field] !== value);
 
-    const writeData = await fs.writeFile(this.pathFile, JSON.stringify([...filtredData]));
+    await fs.writeFile(this.pathFile, JSON.stringify([...filtredData]));
 
     return filtredData;
   }
