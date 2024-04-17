@@ -1,31 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { TecnologiaType } from '../types.ts';
 import TecFetch from '../service/TecFetch.ts';
 import DeleteProject from './DeleteProject.tsx';
+import Context from '../Context.tsx';
 
 function Tecnologies() {
-  const [tecs, setTecs] = useState<TecnologiaType[]>([]);
   const [popup, setPopup] = useState({ open: false, projeto: {} as TecnologiaType });
   const db = new TecFetch();
-
-  useEffect(() => {
-    db.getItems().then((e) => setTecs(e));
-  }, []);
+  const { data } = useContext(Context);
 
   const handleClick = (projeto: TecnologiaType) => {
     setPopup({ open: !popup.open, projeto });
   };
 
   return (
-    <main>
-      {tecs.length > 0 ? tecs.map((tec) => (
+    <main className="flex flex-row flex-wrap gap-3 overflow-auto h-full">
+      {data.tecs.length > 0 ? data.tecs.map((tec) => (
         <div
           key={ tec.title }
-          className="flex flex-row gap-5 w-[300px] text-left"
+          className="flex flex-col gap-5 max-h-[300px] max-w-[200px]
+           items-center justify-evenly text-left
+           text-2xl font-bold border-2 rounded-md border-black p-5"
         >
           <button
             data-testid="tecnology"
-            className="text-2xl font-bold border-2 rounded-md border-black p-1"
+            className="flex flex-col items-center justify-evenly"
             onClick={ () => handleClick(tec) }
           >
             <h2>{tec.title}</h2>

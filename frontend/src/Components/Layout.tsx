@@ -9,7 +9,7 @@ function Layout() {
   const { tec, proj } = useContext(Context);
   const navigate = useNavigate();
   return (
-    <div>
+    <div className="flex flex-col justify-around ">
       <header className="p-5 flex flex-row justify-between">
         <button
           data-testid="new-project-button"
