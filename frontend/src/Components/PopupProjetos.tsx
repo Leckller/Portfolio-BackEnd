@@ -9,7 +9,7 @@ type PopupType = {
   open: boolean, projeto: ProjetosType
 }
 
-function Popup({ setPopup, popup }:
+function PopupProjetos({ setPopup, popup }:
    {setPopup: (p: PopupType) => void, popup: PopupType}) {
   const [edit, setEdit] = useState<ProjetosType>(popup.projeto);
   const [fields, setFields] = useState<ProjetosFieldsBool>({
@@ -68,7 +68,7 @@ function Popup({ setPopup, popup }:
         data-testid="save-edit"
         onClick={ () => {
           const db = new DatabaseFetch();
-          db.editProject(edit, popup.projeto.title);
+          db.editItems(edit, popup.projeto.title);
           setPopup({ open: false, projeto: {} as ProjetosType });
         } }
       >
@@ -78,4 +78,4 @@ function Popup({ setPopup, popup }:
   );
 }
 
-export default Popup;
+export default PopupProjetos;

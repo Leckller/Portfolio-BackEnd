@@ -10,7 +10,7 @@ const typeFields = {
 };
 
 function AddItem({ db }: {db: Fetchs}) {
-  const { tec, proj } = useContext(Context);
+  const { tec, proj, setData, data } = useContext(Context);
 
   const handleAddProject = (field: ProjFields | TecFields, value: string) => {
     if (tec.popupTec.open) {
@@ -69,11 +69,14 @@ function AddItem({ db }: {db: Fetchs}) {
         data-testid="add-project-button"
         onClick={ () => {
           if (tec.popupTec.open) {
-            db.addItem(tec.popupTec.type);
+            db.addItem(tec.popupTec.type)
+              .then((resp) => setData({ projs: data.projs,
+                tecs: resp as TecnologiaType[] }));
             tec.setPopupTec({ type: {} as TecnologiaType, open: false });
             return;
           }
-          db.addItem(proj.popupProj.type);
+          db.addItem(proj.popupProj.type)
+            .then((resp) => setData({ tecs: data.tecs, projs: resp as ProjetosType[] }));
           proj.setPopupProj({ type: {} as ProjetosType, open: false });
         } }
       >

@@ -3,18 +3,22 @@ import { TecnologiaType } from '../types.ts';
 import TecFetch from '../service/TecFetch.ts';
 import DeleteProject from './DeleteProject.tsx';
 import Context from '../Context.tsx';
+import PopupTecnology from './PopupTecnology.tsx';
 
 function Tecnologies() {
-  const [popup, setPopup] = useState({ open: false, projeto: {} as TecnologiaType });
+  const [popup, setPopup] = useState({ open: false,
+    tecnology: {} as TecnologiaType,
+    title: '' });
   const db = new TecFetch();
   const { data } = useContext(Context);
 
-  const handleClick = (projeto: TecnologiaType) => {
-    setPopup({ open: !popup.open, projeto });
+  const handleClick = (tecnology: TecnologiaType) => {
+    setPopup({ open: !popup.open, tecnology, title: tecnology.title });
   };
 
   return (
     <main className="flex flex-row flex-wrap gap-3 overflow-auto h-full">
+      {popup.open && <PopupTecnology DB={ db } popup={ popup } setPopup={ setPopup } />}
       {data.tecs.length > 0 ? data.tecs.map((tec) => (
         <div
           key={ tec.title }
