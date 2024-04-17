@@ -1,4 +1,3 @@
-import fs from 'fs/promises';
 import path from 'path';
 import { ProjetosType } from '../types';
 import FileSystemDB from '../utils/FileSystemDB';
@@ -7,12 +6,12 @@ type MethodResponse<T> = { data: T, status: number }
 
 export default class Database {
 
-  private dbPath = path.resolve(__dirname, './projetos.json');
   private db = new FileSystemDB(path.resolve(__dirname, './projetos.json'))
 
   public async allProjects(): Promise<MethodResponse<ProjetosType[]>> {
-    const data = await this.db.readFile();
-    return { data, status: 200 };
+    const data = await this.db.readFile() as ProjetosType[];
+    const sortedData = data.sort((a, b) => a.title.length - b.title.length);
+    return { data: sortedData, status: 200 };
   }
   public async addProject(newProject: ProjetosType): Promise<MethodResponse<ProjetosType[] | { message: string }>> {
     const { describe, gitHub, tecnologias, title, url } = newProject;

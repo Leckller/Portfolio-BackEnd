@@ -12,8 +12,24 @@ export default class Tecnologies {
   private db = new FileSystemDB(path.resolve(__dirname, './tecnologias.json'))
 
   public async getTecnologies(): Promise<MethodResponse<TecnologiaType[]>> {
-    const data = await this.db.readFile();
-    return { data, status: 200 };
+    const data = await this.db.readFile() as TecnologiaType[];
+    const sortedData = data.sort((a, b) => {
+      if (a.type !== 'language' && b.type === 'language') return 1;
+      if (a.type !== 'language' && b.type !== 'language') {
+        if (b.type === 'environment') return 1;
+        if (a.type !== 'environment' && b.type !== 'environment') {
+          if (b.type === 'framework') return 1;
+          if (a.type !== 'framework' && b.type !== 'framework') {
+            if (b.type === 'db') return 1;
+            if (a.type !== 'db' && b.type !== 'db') {
+              if (b.type === 'style') return 1;
+            }
+          }
+        }
+      }
+      return -1;
+    });
+    return { data: sortedData, status: 200 };
   }
 
   public async addTecnology(tecnology: TecnologiaType): Promise<MethodResponse<TecnologiaType[]>> {

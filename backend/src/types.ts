@@ -9,5 +9,5 @@ export type ProjetosType = {
 export type TecnologiaType = {
   title: string,
   img: string
-  type: number
+  type: string
 }
