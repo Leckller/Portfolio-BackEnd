@@ -28,4 +28,11 @@ routeTecnologies.patch('/', async (req, res) => {
   res.status(status).json({ data });
 })
 
+routeTecnologies.post('/sync', async (req, res) => {
+  const { actualTecnologies } = req.body;
+  const { data, status } = await db.tecnologiesSync(actualTecnologies);
+
+  res.status(status).json({ data });
+});
+
 export default routeTecnologies;

@@ -4,7 +4,8 @@ import routeTecnologies from "./Tecnologies.Route";
 
 const router = Router();
 
-router.use('/', routeMain)
+router.use('/', routeMain);
+
 router.use('/tec', routeTecnologies);
 
 export default router;

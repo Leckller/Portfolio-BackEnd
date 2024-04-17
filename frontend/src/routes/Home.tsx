@@ -15,11 +15,9 @@ function Home() {
 
   useEffect(() => {
     if (data.projs.length === 0 && path === '/home') {
-      console.log('fetch');
       projDB.getItems().then((req) => setData({ ...data, projs: req }));
     }
     if (data.tecs.length === 0 && path === '/tec') {
-      console.log('fetch');
       tecDB.getItems().then((req) => setData({ ...data, tecs: req }));
     }
   }, [path]);

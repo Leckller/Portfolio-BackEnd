@@ -2,7 +2,8 @@ import { ProjetosType } from '../types.ts';
 import Fetchs from '../interfaces/Fetchs.ts';
 
 const authorization = import.meta.env.VITE_AUTH;
-const url = import.meta.env.VITE_URL;
+const url = import.meta.env.VITE_URL_PROJ;
+const urlSync = import.meta.env.VITE_URL_PROJ_SYNC;
 
 export default class DatabaseFetch implements Fetchs {
   public async getItems(): Promise<ProjetosType[]> {
@@ -48,6 +49,19 @@ export default class DatabaseFetch implements Fetchs {
     const Request = await fetch(url, {
       method: 'DELETE',
       body: JSON.stringify({ title }),
+      headers: {
+        'Content-Type': 'application/json',
+        authorization,
+      },
+    });
+    const Response = await Request.json();
+    return Response.data;
+  }
+
+  public async syncItems(acutalProjects: ProjetosType[]): Promise<{message: string}> {
+    const Request = await fetch(urlSync, {
+      method: 'post',
+      body: JSON.stringify({ acutalProjects }),
       headers: {
         'Content-Type': 'application/json',
         authorization,

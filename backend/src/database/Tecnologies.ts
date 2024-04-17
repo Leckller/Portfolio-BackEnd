@@ -50,4 +50,9 @@ export default class Tecnologies {
 
     return { data, status: 200 };
   }
+
+  public async tecnologiesSync(actualTecnologies: TecnologiaType[]): Promise<MethodResponse<{ message: string }>> {
+    const data = await this.db.resetDB(actualTecnologies);
+    return { data: { message: 'Tecnologias Sincronizadas' }, status: 200 }
+  }
 }

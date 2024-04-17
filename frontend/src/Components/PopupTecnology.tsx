@@ -64,6 +64,7 @@ function PopupTecnology({ setPopup, popup, DB }:
               data[isHome][indexItem] = resp;
               setData(data);
             });
+            setPopup({ open: false, tecnology: {} as TecnologiaType, title: '' });
           } }
         >
           Salvar

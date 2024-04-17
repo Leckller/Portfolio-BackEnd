@@ -11,4 +11,6 @@ export default interface Fetchs {
 
   editItems(title: string, fields: string[], values: string[])
   : Promise<ProjetosType | TecnologiaType>;
+
+  syncItems(actualItens: ProjetosType[] | TecnologiaType[]): Promise<{message: string}>
 }

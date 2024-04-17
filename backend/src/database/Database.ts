@@ -35,7 +35,6 @@ export default class Database {
     try {
       const { data } = await this.allProjects();
       const projExists = data.some(e => e.title === titleProject);
-      const dbFiltred = data.filter(e => e.title !== titleProject);
 
       if (!projExists) {
         return { data: { message: 'Projeto não encontrado' }, status: 404 }
@@ -56,5 +55,10 @@ export default class Database {
     }
 
     return { data, status: 200 }
+  }
+
+  public async projetosSync(actualProjects: ProjetosType[]): Promise<MethodResponse<{ message: string }>> {
+    const data = await this.db.resetDB(actualProjects);
+    return { data: { message: 'Projetos Sincronizadas' }, status: 200 }
   }
 }

@@ -47,4 +47,8 @@ export default class FileSystemDB {
 
     return data[data.length - 1];
   }
+
+  public async resetDB(newDB: any[]) {
+    await fs.writeFile(this.pathFile, JSON.stringify([...newDB]));
+  }
 }
