@@ -6,7 +6,6 @@ const db = new Tecnologies();
 
 routeTecnologies.get('/', async (_req, res) => {
   const { data, status } = await db.getTecnologies();
-  console.log('GET-TEC')
   res.status(status).json({ data })
 });
 
